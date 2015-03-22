@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 
 RUN apt-get update && apt-get install -y sbcl emacs24
-RUN adduser --home /home/lisp --disabled-password lisp
+RUN adduser --home /home/lisp --uid 1000 --disabled-password lisp
 
 ADD files/quicklisp.lisp /quicklisp.lisp
 ADD files/start.sh /start.sh
