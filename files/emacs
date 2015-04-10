@@ -1,0 +1,31 @@
+(setq initial-scratch-message nil)
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "sbcl")
+
+;; remove toolbar
+(tool-bar-mode -1)
+
+;; show line numbers
+(global-linum-mode t)
+
+;; monokai (vim-like)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'monokai t)
+
+;; remove trailing whitespace on save
+(add-hook 'write-file-hooks 'delete-trailing-whitespace)
+
+(require 'package)
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(package-initialize)
+
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+(global-auto-complete-mode t)
+(auto-complete-mode t)
+
+(setq evil-shift-width 8)
+(require 'evil)
+(evil-mode 1)
