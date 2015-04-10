@@ -11,8 +11,8 @@ ADD https://raw.githubusercontent.com/oneKelvinSmith/monokai-emacs/master/monoka
 # install sbclrc (which points sbcl to quicklisp)
 ADD files/sbclrc /home/lisp/.sbclrc
 
-# setupemacs.lisp is used to install a plugin
-ADD files/setupemacs.lisp /setupemacs.lisp
+# installplugin.el is used to install a plugin
+ADD files/installplugin.el /installplugin.el
 
 # script.sh does all the magic
 ADD files/script.sh /script.sh

@@ -18,7 +18,7 @@ while getopts "srp:" opt; do
 			# install a plugin for emacs
 			emacs -batch \
 				--eval "(defconst pkg-to-install '${OPTARG})" \
-				-l /setupemacs.lisp
+				-l /installplugin.el
 			;;
 	esac
 done
