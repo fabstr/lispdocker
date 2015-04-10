@@ -1,7 +1,7 @@
 XAUTH=/tmp/.docker.xauth
 
-build: Dockerfile files/start.sh
-	docker build -t lispdocker .
+build: Dockerfile files/start.sh files/dotfiles/emacs/init
+	docker build -t lispdocker . 
 
 run: build
 	touch ${XAUTH} 
