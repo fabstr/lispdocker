@@ -14,13 +14,17 @@ ADD files/start.sh /start.sh
 RUN chmod +x /start.sh
 
 ADD files/setupemacs.lisp /setupemacs.lisp
+RUN mkdir -p /home/lisp/.emacs.d/themes
 
-RUN mkdir -p /home/lisp/.emacs.d
+ADD files/monokai-theme.el /home/lisp/.emacs.d/themes/monokai-theme.el
 RUN chown -R lisp:lisp /home/lisp/.emacs.d
+
 USER lisp
 
 RUN emacs -batch --eval "(defconst pkg-to-install 'auto-complete)" -l /setupemacs.lisp
 RUN emacs -batch --eval "(defconst pkg-to-install 'evil)" -l /setupemacs.lisp
 
-ADD files/dotfiles/emacs/init /home/lisp/.emacs.d/init
-ADD files/dotfiles/emacs/monokai-theme.el /home/lisp/.emacs.d/monokai-theme.el
+ADD files/dotfiles/emacs /home/lisp/.emacs.d/init
+USER root
+RUN chown lisp:lisp /home/lisp/.emacs.d/init
+USER lisp

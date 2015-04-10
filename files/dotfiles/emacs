@@ -8,13 +8,6 @@
 ;; show line numbers
 (global-linum-mode t)
 
-;; enable autocomplete
-;(require 'auto-complete-config)
-;(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-;(ac-config-default)
-;(global-auto-complete-mode t)
-;(auto-complete-mode t)
-
 ;; monokai (vim-like)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'monokai t)
@@ -24,7 +17,7 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/")t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
 
 (require 'auto-complete-config)

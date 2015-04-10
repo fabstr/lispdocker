@@ -1,6 +1,6 @@
 XAUTH=/tmp/.docker.xauth
 
-build: Dockerfile files/start.sh files/dotfiles/emacs/init
+build: Dockerfile files/start.sh files/dotfiles/emacs
 	docker build -t lispdocker . 
 
 run: build
