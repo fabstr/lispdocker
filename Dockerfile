@@ -6,7 +6,7 @@ RUN adduser --home /home/lisp --uid 1000 --disabled-password lisp
 # setup quicklis and install slime
 ADD files/quicklisp.lisp /quicklisp.lisp
 ADD files/setup.sh /setup.sh
-ADD files/dotfiles/sbclrc /home/lisp/.sbclrc
+ADD files/sbclrc /home/lisp/.sbclrc
 RUN chmod +x /setup.sh
 RUN su - lisp -c /setup.sh
 
@@ -24,7 +24,7 @@ USER lisp
 RUN emacs -batch --eval "(defconst pkg-to-install 'auto-complete)" -l /setupemacs.lisp
 RUN emacs -batch --eval "(defconst pkg-to-install 'evil)" -l /setupemacs.lisp
 
-ADD files/dotfiles/emacs /home/lisp/.emacs.d/init
+ADD files/emacs /home/lisp/.emacs.d/init
 USER root
 RUN chown lisp:lisp /home/lisp/.emacs.d/init
 USER lisp
