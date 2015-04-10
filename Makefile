@@ -1,6 +1,6 @@
 XAUTH=/tmp/.docker.xauth
 
-build: Dockerfile files/start.sh files/emacs
+build: Dockerfile files/script.sh files/emacs
 	docker build -t lispdocker . 
 
 run: build
@@ -12,4 +12,4 @@ run: build
 		-v $$HOME:/development \
 		-e DISPLAY=$$DISPLAY \
 		-e XAUTHORITY=${XAUTH} \
-		-it lispdocker /start.sh
+		-it lispdocker /script.sh -r

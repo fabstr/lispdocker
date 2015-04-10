@@ -3,28 +3,21 @@ FROM ubuntu:14.04
 RUN apt-get update && apt-get install -y sbcl emacs24
 RUN adduser --home /home/lisp --uid 1000 --disabled-password lisp
 
-# setup quicklis and install slime
-ADD files/quicklisp.lisp /quicklisp.lisp
-ADD files/setup.sh /setup.sh
+# setup quicklisp and install slime
+ADD http://beta.quicklisp.org/quicklisp.lisp /quicklisp.lisp
 ADD files/sbclrc /home/lisp/.sbclrc
-RUN chmod +x /setup.sh
-RUN su - lisp -c /setup.sh
-
-ADD files/start.sh /start.sh
-RUN chmod +x /start.sh
-
 ADD files/setupemacs.lisp /setupemacs.lisp
+ADD files/script.sh /script.sh
+ADD https://raw.githubusercontent.com/oneKelvinSmith/monokai-emacs/master/monokai-theme.el \
+	    /home/lisp/.emacs.d/themes/monokai-theme.el
+RUN chown -R lisp:lisp /home/lisp/.emacs.d /quicklisp.lisp 
+RUN chmod +x /script.sh
+
+USER lisp
+RUN /script.sh -s
 RUN mkdir -p /home/lisp/.emacs.d/themes
+RUN /script.sh -p auto-complete
+RUN /script.sh -p evil
 
-ADD files/monokai-theme.el /home/lisp/.emacs.d/themes/monokai-theme.el
-RUN chown -R lisp:lisp /home/lisp/.emacs.d
-
-USER lisp
-
-RUN emacs -batch --eval "(defconst pkg-to-install 'auto-complete)" -l /setupemacs.lisp
-RUN emacs -batch --eval "(defconst pkg-to-install 'evil)" -l /setupemacs.lisp
-
+# add this latest, smaller set of changes to update
 ADD files/emacs /home/lisp/.emacs.d/init
-USER root
-RUN chown lisp:lisp /home/lisp/.emacs.d/init
-USER lisp
